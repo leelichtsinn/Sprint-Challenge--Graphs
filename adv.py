@@ -55,6 +55,9 @@ class Stack():
     def size(self):
         return len(self.stack)
 
+def get_neighbors(self, vertex_id):
+    return self.vertices[vertex_id]
+
 def dft(self, starting_vertex):
     stack = []
     visited = set()
@@ -68,8 +71,8 @@ def dft(self, starting_vertex):
                 stack.append(neighbor)
 
 def bfs(self, starting_vertex, destination_vertex):
+    visited = {}
     q = Queue()
-    visited = set()
 
     path = [starting_vertex]
     q.enqueue(path)
@@ -87,6 +90,10 @@ def bfs(self, starting_vertex, destination_vertex):
                 path_copy = current_path[:]
                 path_copy.append(neighbor)
                 q.enqueue(path_copy)
+
+# loop dft and bfs
+while len(traversal_path) > len((room_graph) -1):
+    dft(player.current_room.id)
 
 # TRAVERSAL TEST
 visited_rooms = set()
