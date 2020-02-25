@@ -10,11 +10,11 @@ world = World()
 
 
 # You may uncomment the smaller graphs for development and testing purposes.
-# map_file = "maps/test_line.txt"
+map_file = "maps/test_line.txt"
 # map_file = "maps/test_cross.txt"
 # map_file = "maps/test_loop.txt"
 # map_file = "maps/test_loop_fork.txt"
-map_file = "maps/main_maze.txt"
+# map_file = "maps/main_maze.txt"
 
 # Loads the map into a dictionary
 room_graph=literal_eval(open(map_file, "r").read())
@@ -29,19 +29,6 @@ player = Player(world.starting_room)
 # traversal_path = ['n', 'n']
 traversal_path = []
 
-class Queue():
-    def __init__(self):
-        self.queue = []
-    def enqueue(self, value):
-        self.queue.append(value)
-    def dequeue(self):
-        if self.size() > 0:
-            return self.queue.pop(0)
-        else:
-            return None
-    def size(self):
-        return len(self.queue)
-
 class Stack():
     def __init__(self):
         self.stack = []
@@ -55,8 +42,8 @@ class Stack():
     def size(self):
         return len(self.stack)
 
-def get_neighbors(self, vertex_id):
-    return self.vertices[vertex_id]
+def get_neighbors(self, vertex):
+    return player.current_room.get_exits()
 
 def dft(self, starting_vertex):
     stack = []
@@ -66,34 +53,18 @@ def dft(self, starting_vertex):
         current_node = stack.pop()
         if current_node not in visited:
             visited.add(current_node)
-            neighbors = self.getNeighbors()
-            for neighbor in neighbors:
+            neighbors = get_neighbors()
+            # print(neighbors)
+            # player.travel()
+            for neighbor in neighbors: # not needed
                 stack.append(neighbor)
 
-def bfs(self, starting_vertex, destination_vertex):
-    visited = {}
-    q = Queue()
-
-    path = [starting_vertex]
-    q.enqueue(path)
-
-    while q.size() > 0:
-        current_path = q.dequeue()
-        current_node = current_path[-1]
-        if current_node == destination_vertex:
-            return current_path
-
-        if current_node not in visited:
-            visited.add(current_node)
-            neighbors = self.getNeighbors(current_node)
-            for neighbor in neighbors:
-                path_copy = current_path[:]
-                path_copy.append(neighbor)
-                q.enqueue(path_copy)
-
 # loop dft and bfs
-while len(traversal_path) > len((room_graph) -1):
+while len(traversal_path) > len(room_graph) - 1:
+    # print(player.current_room.id)
+    # print(player.current_room.get_exits())
     dft(player.current_room.id)
+
 
 # TRAVERSAL TEST
 visited_rooms = set()
