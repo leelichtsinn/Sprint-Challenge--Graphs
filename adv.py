@@ -54,7 +54,18 @@ class Stack():
             return None
     def size(self):
         return len(self.stack)
-        
+
+def dft(self, starting_vertex):
+    stack = []
+    visited = set()
+    stack.append(starting_vertex)
+    while len(stack) > 0:
+        current_node = stack.pop()
+        if current_node not in visited:
+            visited.add(current_node)
+            neighbors = self.getNeighbors()
+            for neighbor in neighbors:
+                stack.append(neighbor)
 
 # TRAVERSAL TEST
 visited_rooms = set()
