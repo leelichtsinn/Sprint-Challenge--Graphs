@@ -67,6 +67,27 @@ def dft(self, starting_vertex):
             for neighbor in neighbors:
                 stack.append(neighbor)
 
+def bfs(self, starting_vertex, destination_vertex):
+    q = Queue()
+    visited = set()
+
+    path = [starting_vertex]
+    q.enqueue(path)
+
+    while q.size() > 0:
+        current_path = q.dequeue()
+        current_node = current_path[-1]
+        if current_node == destination_vertex:
+            return current_path
+
+        if current_node not in visited:
+            visited.add(current_node)
+            neighbors = self.getNeighbors(current_node)
+            for neighbor in neighbors:
+                path_copy = current_path[:]
+                path_copy.append(neighbor)
+                q.enqueue(path_copy)
+
 # TRAVERSAL TEST
 visited_rooms = set()
 player.current_room = world.starting_room
