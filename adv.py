@@ -10,11 +10,11 @@ world = World()
 
 
 # You may uncomment the smaller graphs for development and testing purposes.
-map_file = "maps/test_line.txt"
+# map_file = "maps/test_line.txt"
 # map_file = "maps/test_cross.txt"
 # map_file = "maps/test_loop.txt"
 # map_file = "maps/test_loop_fork.txt"
-# map_file = "maps/main_maze.txt"
+map_file = "maps/main_maze.txt"
 
 # Loads the map into a dictionary
 room_graph=literal_eval(open(map_file, "r").read())
@@ -42,10 +42,10 @@ class Stack():
     def size(self):
         return len(self.stack)
 
-def get_neighbors(self, vertex):
+def get_exits(vertex):
     return player.current_room.get_exits()
 
-def dft(self, starting_vertex):
+def dft(starting_vertex=player.current_room.id):
     stack = []
     visited = set()
     stack.append(starting_vertex)
@@ -53,17 +53,21 @@ def dft(self, starting_vertex):
         current_node = stack.pop()
         if current_node not in visited:
             visited.add(current_node)
-            neighbors = get_neighbors()
-            # print(neighbors)
-            # player.travel()
-            for neighbor in neighbors: # not needed
-                stack.append(neighbor)
+            exits = get_exits(current_node)
+            # print('exits', exits)
+            random_room = random.choice(exits)
+            # print('random_room', str(random_room))
+            # traversal = player.travel(random_room)
+            # print('traversal', traversal)
+            # print('player', player)
+            traversal_path.append(random_room)
 
 # loop dft and bfs
-while len(traversal_path) > len(room_graph) - 1:
+while len(traversal_path) <= len(room_graph) - 1:
+    # print('traversal_path', traversal_path)
     # print(player.current_room.id)
     # print(player.current_room.get_exits())
-    dft(player.current_room.id)
+    dft()
 
 
 # TRAVERSAL TEST
