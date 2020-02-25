@@ -29,6 +29,45 @@ player = Player(world.starting_room)
 # traversal_path = ['n', 'n']
 traversal_path = []
 
+class Stack():
+    def __init__(self):
+        self.stack = []
+    def push(self, value):
+        self.stack.append(value)
+    def pop(self):
+        if self.size() > 0:
+            return self.stack.pop()
+        else:
+            return None
+    def size(self):
+        return len(self.stack)
+
+def get_exits(vertex):
+    return player.current_room.get_exits()
+
+def dft(starting_vertex=player.current_room.id):
+    stack = []
+    visited = set()
+    stack.append(starting_vertex)
+    while len(stack) > 0:
+        current_node = stack.pop()
+        if current_node not in visited:
+            visited.add(current_node)
+            exits = get_exits(current_node)
+            # print('exits', exits)
+            random_room = random.choice(exits)
+            # print('random_room', str(random_room))
+            # traversal = player.travel(random_room)
+            # print('traversal', traversal)
+            # print('player', player)
+            traversal_path.append(random_room)
+
+# loop dft and bfs
+while len(traversal_path) <= len(room_graph) - 1:
+    # print('traversal_path', traversal_path)
+    # print(player.current_room.id)
+    # print(player.current_room.get_exits())
+    dft()
 
 
 # TRAVERSAL TEST
